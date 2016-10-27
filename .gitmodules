@@ -1,0 +1,3 @@
+[submodule "fbchat"]
+	path = fbchat
+	url = https://github.com/0ffkilter/fbchat
