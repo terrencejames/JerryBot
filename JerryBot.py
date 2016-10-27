@@ -1,9 +1,9 @@
-import fbchat
+from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 
-class JerryBot(fbchat.Client):
+class JerryBot(Client):
     def __init__(self, email, password, debug=True, user_agent=None):
-        fbchat.Client.__init__(self, email, password, debug, user_agent)
+        Client.__init__(self, email, password, debug, user_agent)
 
     def on_message(self, mid, author_id, author_name, message, metadata):
         self.markAsDelivered(author_id, mid) #mark delivered
@@ -23,9 +23,11 @@ class JerryBot(fbchat.Client):
             print(key, value)
 
         if "threadFbId" in metadata["delta"]["messageMetadata"]["threadKey"]:
-            print("foo")
-            self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], "bot test", message_type='group')
+            if str(author_id) != str(self.uid):
+                self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], "bot test", message_type='group')
         print("\n\n\n")
 bot = JerryBot(USERNAME, PASSWORD)
 bot.listen()
+
+
 
