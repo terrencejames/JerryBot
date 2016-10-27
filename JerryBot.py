@@ -1,6 +1,7 @@
 from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules
+from configuration import prefixes
 
 class JerryBot(Client):
     test = False
@@ -13,7 +14,7 @@ class JerryBot(Client):
 
 
     def parse_message(self, message):
-        if message[0] == '!':
+        if message[0] in prefixes:
             args = message[1:].split(" ")
             command = args[0]
             arguments = args[1:]
