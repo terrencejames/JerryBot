@@ -38,7 +38,7 @@ class JerryBot(Client):
             isValid, result = self.parse_message(message)
             if isValid:
                 self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
-        print("\n\n\n")
+   
 
 
 def main():
