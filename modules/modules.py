@@ -1,5 +1,5 @@
-from modules.roll import roll
-from modules.flip import flip
+from roll import roll
+from flip import flip
 
 def help_message(args=[]):
     result = "Commands:\n"
