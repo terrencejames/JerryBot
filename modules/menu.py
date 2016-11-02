@@ -43,9 +43,13 @@ def get_menu(dhall, day, meal):
     food.append('~*~' + dhall + '~*~')
     food.append('~*~' + day + '~*~')
     food.append('~*~' + meal + '~*~')
-    for f in j[0]['food_items']:
-        food.append(str(f))
-    return food
+    try: 
+        for f in j[0]['food_items']:
+            food.append(str(f))
+        return food
+    except:
+        print("err")
+        return []
 
 def wat_meal():
     rn = datetime.now()
@@ -90,4 +94,6 @@ def menu(args):
         meal = wat_meal()
         day = days[datetime.today().weekday()]
     food = get_menu(dhall, day, meal)
-    return ('\n'.join(food))
+    if len(food) > 0:
+        return ('\n'.join(food))
+    return "No menu"

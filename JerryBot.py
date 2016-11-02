@@ -50,6 +50,7 @@ def main():
         except (KeyboardInterrupt, SystemExit):
             raise
         else:
+            print(sys.exc_info()[0])
             print("error?")
 
 
