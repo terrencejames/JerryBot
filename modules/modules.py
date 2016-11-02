@@ -26,11 +26,16 @@ def help_message(args=[]):
         result += "  !%s\n" %(key)
     return result
 
+
+"""command : function"""
 modules = {
     "roll": roll,
     "flip": flip,
     "help": help_message,
     "menu": menu,
+    "fud": menu,
+    "food": menu,
+    "sustenance":menu,
     "thanks": thanks,
     "eatadick": eatadick,
     "weather": weather,
