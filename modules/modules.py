@@ -1,5 +1,9 @@
 from roll import roll
 from flip import flip
+from menu import menu
+
+def thanks(args=[]):
+    return ('(y)')
 
 def help_message(args=[]):
     result = "Commands:\n"
@@ -10,7 +14,9 @@ def help_message(args=[]):
 modules = {
     "roll": roll,
     "flip": flip,
-    "help": help_message
+    "help": help_message,
+    "menu": menu,
+    "thanks": thanks
     }
 
 
