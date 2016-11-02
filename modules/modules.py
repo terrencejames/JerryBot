@@ -1,6 +1,7 @@
 from roll import roll
 from flip import flip
 from menu import menu
+from weather import weather, jacket
 
 def thanks(args=[]):
     return ('(y)')
@@ -20,7 +21,9 @@ modules = {
     "help": help_message,
     "menu": menu,
     "thanks": thanks,
-    "eatadick": eatadick
+    "eatadick": eatadick,
+    "weather": weather,
+    "jacket": jacket
     }
 
 
