@@ -5,6 +5,9 @@ from menu import menu
 def thanks(args=[]):
     return ('(y)')
 
+def eatadick(args=[]):
+    return ('fuck u Jess')
+
 def help_message(args=[]):
     result = "Commands:\n"
     for key,value in modules.items():
@@ -16,7 +19,8 @@ modules = {
     "flip": flip,
     "help": help_message,
     "menu": menu,
-    "thanks": thanks
+    "thanks": thanks,
+    "eatadick": eatadick
     }
 
 
