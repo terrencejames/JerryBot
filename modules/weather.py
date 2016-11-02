@@ -41,7 +41,7 @@ def weather(args):
 
     if len(args) < 1:
         should_update()
-        return "Weather:\n%s/%s\nTemp: %s\nMin: %s Max %s" %(current_weather["weather"][0]["main"],
+        return "Weather:\n%s/%s\nTemp: %s\nMin: %s Max: %s" %(current_weather["weather"][0]["main"],
                                                         current_weather["weather"][0]["description"],
                                                         temp_change(current_weather["main"]["temp"]),
                                                         temp_change(current_weather["main"]["temp_min"]),
@@ -49,7 +49,7 @@ def weather(args):
 
     else:
         loc_weather = get_weather(city=args[0])
-        return "Weather in %s:\n%s/%s\nTemp: %s\nMin: %s Max %s" %(args[0],
+        return "Weather in %s:\n%s/%s\nTemp: %s\nMin: %s Max: %s" %(args[0],
                                                         loc_weather["weather"][0]["main"],
                                                         loc_weather["weather"][0]["description"],
                                                         temp_change(loc_weather["main"]["temp"]),

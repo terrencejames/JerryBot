@@ -2,12 +2,23 @@ from roll import roll
 from flip import flip
 from menu import menu
 from weather import weather, jacket
+from random import randint
 
 def thanks(args=[]):
     return ('(y)')
 
 def eatadick(args=[]):
+    num = randint(1,3)
+    if num is not 1:
+        return "rood"
     return ('fuck u Jess')
+
+def doabarrelroll(args=[]):
+    num = randint(1,2)
+    if num is 1:
+        return "WHEeeEEeeeeEeeEEeEEEeEE"
+    else:
+        return "fuck u Jerry"
 
 def help_message(args=[]):
     result = "Commands:\n"
@@ -23,7 +34,9 @@ modules = {
     "thanks": thanks,
     "eatadick": eatadick,
     "weather": weather,
-    "jacket": jacket
+    "jacket": jacket,
+    "barrelroll" : doabarrelroll,
+    "doabarrelroll": doabarrelroll
     }
 
 

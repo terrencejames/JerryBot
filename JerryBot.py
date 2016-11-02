@@ -2,6 +2,7 @@ from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules
 from configuration import prefixes
+import sys
 
 class JerryBot(Client):
     test = False
@@ -46,7 +47,9 @@ def main():
         try:
             bot = JerryBot(USERNAME, PASSWORD)
             bot.listen()
-        except:
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        else:
             print("error?")
 
 
