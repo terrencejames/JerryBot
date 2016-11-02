@@ -14,6 +14,7 @@ to initialize the submodule repo
 `git submodule update`
 to update the repo and pull the data.
 4. Update credentials.py with relevant account information
+5. Rename auth.py.example to auth.py and fill in the relevant information
 
 ##Usage
 
@@ -34,3 +35,9 @@ Currently provided modules:
 Planned Modules:
  * Reminders
  * Linkme/define
+ 
+Create a module:
+
+1. Create a module in modules/
+2. Have one endpoint function that takes in a list of arguments (doesn't have to do anything with them)
+3. Add function to modules{} in modules/modules.py
