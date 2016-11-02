@@ -48,7 +48,7 @@ def jacket(args):
     global current_weather
     global hot_temp, cool_temp, chilly_temp
     global no_wind, some_wind, many_wind
-
+    should_update()
     temp = float(temp_change(current_weather["main"]["temp"]))
     speed = float(current_weather["wind"]["speed"])
     res_string = ""
@@ -75,10 +75,10 @@ def jacket(args):
     else:
         res_string = res_string + "and there's a hurricane."
 
-    if not in_range(temp, hot_temp) and not in_range(speed, no_wind):
-        res_string = "You need a jacket\n" + res_string
+    if not in_range(temp, hot_temp) or not in_range(speed, no_wind):
+        res_string = "You need a jacket.\n" + res_string
     else:
-        res_string = "You don't need a jacket\n" + res_string
+        res_string = "You don't need a jacket.\n" + res_string
 
     return res_string
 
