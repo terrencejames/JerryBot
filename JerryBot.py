@@ -39,6 +39,10 @@ class JerryBot(Client):
             isValid, result = self.parse_message(message)
             if isValid:
                 self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
+        else:
+            if str(author_id) != str(self.uid):
+                isValid, result = self.parse_message(message)
+                self.send(author_id, result)
 
 
 
