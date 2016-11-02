@@ -10,7 +10,7 @@ def thanks(args=[]):
 def eatadick(args=[]):
     num = randint(1,3)
     if num is not 1:
-        return "rood"
+        return "r00d"
     return ('fuck u Jess')
 
 def doabarrelroll(args=[]):

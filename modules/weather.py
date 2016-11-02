@@ -48,8 +48,8 @@ def weather(args):
                                                         temp_change(current_weather["main"]["temp_max"]))
 
     else:
-        loc_weather = get_weather(city=args[0])
-        return "Weather in %s:\n%s/%s\nTemp: %s\nMin: %s Max: %s" %(args[0],
+        loc_weather = get_weather(city=" ".join(args))
+        return "Weather in %s:\n%s/%s\nTemp: %s\nMin: %s Max: %s" %(" ".join(args),
                                                         loc_weather["weather"][0]["main"],
                                                         loc_weather["weather"][0]["description"],
                                                         temp_change(loc_weather["main"]["temp"]),
