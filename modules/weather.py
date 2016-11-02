@@ -18,7 +18,7 @@ def in_range(x, var):
     return (x >= a and x < b)
 
 def temp_change(t):
-    return str((float(t)*9/5.0)-459.67)
+    return "%.2f" %((float(t)*9/5.0)-459.67)
 
 def should_update():
     global current_weather
@@ -38,12 +38,25 @@ def get_weather(city="Claremont"):
 
 def weather(args):
     global current_weather
-    should_update()
-    return "Weather:\n%s/%s\nTemp: %s\nMin: %s Max %s" %(current_weather["weather"][0]["main"],
+
+    if len(args) < 1:
+        should_update()
+        return "Weather:\n%s/%s\nTemp: %s\nMin: %s Max %s" %(current_weather["weather"][0]["main"],
                                                         current_weather["weather"][0]["description"],
                                                         temp_change(current_weather["main"]["temp"]),
                                                         temp_change(current_weather["main"]["temp_min"]),
                                                         temp_change(current_weather["main"]["temp_max"]))
+
+    else:
+        loc_weather = get_weather(city=args[0])
+        return "Weather in %s:\n%s/%s\nTemp: %s\nMin: %s Max %s" %(args[0],
+                                                        loc_weather["weather"][0]["main"],
+                                                        loc_weather["weather"][0]["description"],
+                                                        temp_change(loc_weather["main"]["temp"]),
+                                                        temp_change(loc_weather["main"]["temp_min"]),
+                                                        temp_change(loc_weather["main"]["temp_max"]))
+
+
 def jacket(args):
     global current_weather
     global hot_temp, cool_temp, chilly_temp
@@ -81,4 +94,5 @@ def jacket(args):
         res_string = "You don't need a jacket.\n" + res_string
 
     return res_string
+
 

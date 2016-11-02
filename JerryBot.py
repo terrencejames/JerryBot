@@ -38,12 +38,16 @@ class JerryBot(Client):
             isValid, result = self.parse_message(message)
             if isValid:
                 self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
-   
+
 
 
 def main():
-    bot = JerryBot(USERNAME, PASSWORD)
-    bot.listen()
+    while 1:
+        try:
+            bot = JerryBot(USERNAME, PASSWORD)
+            bot.listen()
+        except:
+            print("error?")
 
 
 
