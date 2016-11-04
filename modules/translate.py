@@ -12,6 +12,8 @@ def to_iso(word):
     except:
         if word_lower in languages.values():
             return word_lower
+        if word in languages.values():
+            return word
     return ""
 
 
