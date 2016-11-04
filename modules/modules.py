@@ -26,7 +26,7 @@ def doabarrelroll(args=[]):
 
 def help_message(args=[]):
     result = "Commands:\n"
-    for key,value in modules.items():
+    for key in sorted(modules):
         result += "  !%s\n" %(key)
     return result
 
