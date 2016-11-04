@@ -40,6 +40,7 @@ modules = {
     "birb": mini_modules.bird,
     "choose": choose,
     "tip": tip,
-    "translate" : translate_text
+    "translate" : translate_text,
+    "goodshit" : mini_modules.goodshit
     }
 
