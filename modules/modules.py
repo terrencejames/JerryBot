@@ -1,35 +1,22 @@
-# -*- coding: utf8 -*- 
+# -*- coding: utf8 -*-
 from roll import roll
 from flip import flip
 from menu import menu
 from choose import choose
 from weather import weather, jacket
 from random import randint
+from mini_modules import *
 
-def shrug(args=[]):
-    return ('¯\_(ツ)_/¯')
-
-def thanks(args=[]):
-    return ('(y)')
-
-def eatadick(args=[]):
-    num = randint(1,3)
-    if num is not 1:
-        return "r00d"
-    return ('fuck u Jess')
-
-def doabarrelroll(args=[]):
-    num = randint(1,2)
-    if num is 1:
-        return "WHEeeEEeeeeEeeEEeEEEeEE"
-    else:
-        return "fuck u Jerry"
+help_string = ""
 
 def help_message(args=[]):
-    result = "Commands:\n"
-    for key in sorted(modules):
-        result += "  !%s\n" %(key)
-    return result
+    global help_string
+    if help_string is "":
+        result = "Commands:\n"
+        for key in sorted(modules):
+            result += "  !%s\n" %(key)
+        help_string = result
+    return help_string
 
 
 """command : function"""
@@ -41,14 +28,13 @@ modules = {
     "fud": menu,
     "food": menu,
     "sustenance":menu,
-    "thanks": thanks,
-    "eatadick": eatadick,
+    "thanks": mini_modules.thanks,
+    "eatadick": mini_modules.eatadick,
     "weather": weather,
     "jacket": jacket,
-    "barrelroll" : doabarrelroll,
-    "doabarrelroll": doabarrelroll,
-    "shrug": shrug,
+    "barrelroll" : mini_modules.doabarrelroll,
+    "doabarrelroll": mini_modules.doabarrelroll,
+    "shrug": mini_modules.shrug,
     "choose": choose
     }
-
 
