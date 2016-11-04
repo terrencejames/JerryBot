@@ -6,7 +6,7 @@ from choose import choose
 from weather import weather, jacket
 from random import randint
 from tip import tip
-from translate.py import translate_text
+from translate import translate_text
 import mini_modules
 
 help_string = ""
