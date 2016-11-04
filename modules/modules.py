@@ -2,6 +2,7 @@
 from roll import roll
 from flip import flip
 from menu import menu
+from choose import choose
 from weather import weather, jacket
 from random import randint
 
@@ -46,7 +47,8 @@ modules = {
     "jacket": jacket,
     "barrelroll" : doabarrelroll,
     "doabarrelroll": doabarrelroll,
-    "shrug": shrug
+    "shrug": shrug,
+    "choose": choose
     }
 
 
