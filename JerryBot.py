@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*- 
 from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules

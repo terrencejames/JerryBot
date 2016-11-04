@@ -1,8 +1,12 @@
+# -*- coding: utf8 -*- 
 from roll import roll
 from flip import flip
 from menu import menu
 from weather import weather, jacket
 from random import randint
+
+def shrug(args=[]):
+    return ('¯\_(ツ)_/¯')
 
 def thanks(args=[]):
     return ('(y)')
@@ -41,7 +45,8 @@ modules = {
     "weather": weather,
     "jacket": jacket,
     "barrelroll" : doabarrelroll,
-    "doabarrelroll": doabarrelroll
+    "doabarrelroll": doabarrelroll,
+    "shrug": shrug
     }
 
 

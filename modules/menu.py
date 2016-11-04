@@ -7,7 +7,7 @@ dhalls = ['frary', 'frank', 'cmc', 'mudd', 'scripps', 'oldenborg', 'pitzer']
 meals = ['breakfast', 'lunch', 'dinner']
 days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'today']
 dhall_aliases = {'collins' : 'cmc', 'colins' : 'cmc', 'hoch' : 'mudd', 'malott' : 'scripps', 'malot': 'scripps', 'oldie' : 'oldenborg', 'old' : 'oldenborg', 'mcconnel' : 'pitzer', 'mcconnell' : 'pitzer'}
-day_aliases = {'m' : 'mon', 'monday' : 'mon'}
+day_aliases = {'m' : 'mon', 'monday' : 'mon', 't' : 'tue', 'tuesday' : 'tue', 'w': 'wed', 'wednesday' : 'wed', 'r' : 'thu', 'thursday' : 'thu', 'f' : 'fri', 'friday':'fri'}
 
 def parse_input(in_text):
     # Check each of the input words, determine what's what
