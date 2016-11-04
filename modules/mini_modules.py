@@ -8,11 +8,9 @@ Funny? Maybe in small quantities
 
 
 """
-def shrug(args=[]):
-    return ('¯\_(ツ)_/¯')
+shrug = lambda args : '¯\_(ツ)_/¯'
 
-def thanks(args=[]):
-    return ('(y)')
+thanks = lambda args : '(y)'
 
 def eatadick(args=[]):
     num = randint(1,3)
@@ -27,8 +25,7 @@ def doabarrelroll(args=[]):
     else:
         return "fuck u Jerry"
 
-def bird(args=[]):
-    return """
+bird = lambda args : """
 .._
 <o)_,/
 .(_==/
