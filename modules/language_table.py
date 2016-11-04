@@ -5,6 +5,8 @@ languages = {
         "bosnian": "bs-Latn",
         "bulgarian": "bg",
         "catalan": "ca",
+        "chinese" : "zh-CHS", #code for "regular" chinese
+        "cn": "zh-CHS",      #cn code
         "chinese-simplified": "zh-CHS",
         "chinese-traditional": "zh-CHT",
         "croatian": "hr",
