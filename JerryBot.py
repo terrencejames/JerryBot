@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*- 
+# -*- coding: utf8 -*-
 from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules
@@ -25,32 +25,40 @@ class JerryBot(Client):
         return (False, "")
 
     def on_message(self, mid, author_id, author_name, message, metadata):
-        self.markAsDelivered(author_id, mid) #mark delivered
-        self.markAsRead(author_id) #mark read
+        try:
+            self.markAsDelivered(author_id, mid) #mark delivered
+            self.markAsRead(author_id) #mark read
 
-        if self.test:
-            print("%s said: %s"%(author_id, message))
-            print(mid)
-            print(author_name)
-            print(metadata)
-            print("===")
+            if self.test:
+                print("%s said: %s"%(author_id, message))
+                print(mid)
+                print(author_name)
+                print(metadata)
+                print("===")
 
-        if "threadFbId" in metadata["delta"]["messageMetadata"]["threadKey"]:
-            #if str(author_id) != str(self.uid):
-            isValid, result = self.parse_message(message)
-            if isValid:
-                self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
-        else:
-            if str(author_id) != str(self.uid):
+            #reply to groups
+            if "threadFbId" in metadata["delta"]["messageMetadata"]["threadKey"]:
+                #if str(author_id) != str(self.uid):
                 isValid, result = self.parse_message(message)
-                self.send(author_id, result)
+                if isValid:
+                    self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
+            #reply to people
+            else:
+                if str(author_id) != str(self.uid):
+                    isValid, result = self.parse_message(message)
+
+                    if isValid:
+                        self.send(author_id, result)
+        except:
+            pass
 
 
 
 def main():
+
+    bot = JerryBot(USERNAME, PASSWORD)
     while 1:
         try:
-            bot = JerryBot(USERNAME, PASSWORD)
             bot.listen()
         except (KeyboardInterrupt, SystemExit):
             raise
