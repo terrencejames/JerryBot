@@ -25,7 +25,6 @@ languages = {
         "hungarian":"hu",
         "indonesian":"id",
         "italian":"it",
-        "japanese":"jp",
         "kiswahili":"sw",
         "klingon":"tlh",
         "klingon-plqad":"tlh-Qaak",
