@@ -4,9 +4,10 @@ from flip import flip
 from menu import menu
 from choose import choose
 from weather import weather, jacket
-from random import randint
 from tip import tip
 from translate import translate_text
+from rood import eatadick
+from barrelroll import doabarrelroll
 import mini_modules
 
 help_string = ""
@@ -31,11 +32,11 @@ modules = {
     "food": menu,
     "sustenance":menu,
     "thanks": mini_modules.thanks,
-    "eatadick": mini_modules.eatadick,
+    "eatadick": eatadick,
     "weather": weather,
     "jacket": jacket,
-    "barrelroll" : mini_modules.doabarrelroll,
-    "doabarrelroll": mini_modules.doabarrelroll,
+    "barrelroll" : doabarrelroll,
+    "doabarrelroll": doabarrelroll,
     "shrug": mini_modules.shrug,
     "birb": mini_modules.bird,
     "choose": choose,
