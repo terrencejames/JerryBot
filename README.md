@@ -35,6 +35,9 @@ Currently provided modules:
 Planned Modules:
  * Reminders
  * Linkme/define
+ * Random quote generation
+ * Random joke generation
+ * Combinatorial calculations
  
 Create a module:
 
