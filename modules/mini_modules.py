@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+
+"""
+Some "funny" functions for our group chats.
+
+Useful? No
+Funny? Maybe in small quantities
+
+
+"""
 def shrug(args=[]):
     return ('¯\_(ツ)_/¯')
 
@@ -20,9 +29,10 @@ def doabarrelroll(args=[]):
 
 def bird(args=[]):
     return """
-.._   
+.._
 <o)_,/
 .(_==/
 ...='-
 """
+
 

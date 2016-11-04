@@ -5,6 +5,8 @@ from menu import menu
 from choose import choose
 from weather import weather, jacket
 from random import randint
+from tip import tip
+from translate.py import translate_text
 import mini_modules
 
 help_string = ""
@@ -36,6 +38,8 @@ modules = {
     "doabarrelroll": mini_modules.doabarrelroll,
     "shrug": mini_modules.shrug,
     "birb": mini_modules.bird,
-    "choose": choose
+    "choose": choose,
+    "tip": tip,
+    "translate" : translate_text
     }
 
