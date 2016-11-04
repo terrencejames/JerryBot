@@ -32,7 +32,7 @@ def translate_text(args=[]):
     words = " ".join(args[1:])
     if len(langs) == 1:
         try:
-            lang = languages[langs[0].lower()]
+            lang = to_iso(langs[0].lower())
             return translator.translate(words, lang)
         except:
             return "language not found"
