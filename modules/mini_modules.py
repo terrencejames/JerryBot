@@ -19,9 +19,10 @@ def doabarrelroll(args=[]):
         return "fuck u Jerry"
 
 def bird(args=[]):
-    return
-      """ __
-         ( ->
-         / )\\
-        <_/_/
-        \"\""""
+    return """
+.._   
+<o)_,/
+.(_==/
+...='-
+"""
+

@@ -5,7 +5,7 @@ from menu import menu
 from choose import choose
 from weather import weather, jacket
 from random import randint
-from mini_modules import *
+import mini_modules
 
 help_string = ""
 
@@ -35,6 +35,7 @@ modules = {
     "barrelroll" : mini_modules.doabarrelroll,
     "doabarrelroll": mini_modules.doabarrelroll,
     "shrug": mini_modules.shrug,
+    "birb": mini_modules.bird,
     "choose": choose
     }
 
