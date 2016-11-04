@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def shrug(args=[]):
     return ('¯\_(ツ)_/¯')
 
