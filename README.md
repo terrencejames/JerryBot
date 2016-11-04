@@ -25,7 +25,7 @@ to update the repo and pull the data.
 Currently provided modules:
  * Flip (Flip a coin)
  * Roll (Roll an n sided die, default six)
- * Menu $day $dining_hall $meal
+ * Menu $day $dining_hall $meal (order of params shouldn't matter)
  * eatadick 
  * weather
  * jackets
