@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 
 dhalls = ['frary', 'frank', 'cmc', 'mudd', 'scripps', 'oldenborg', 'pitzer']
-meals = ['breakfast', 'lunch', 'dinner']
+meals = ['breakfast', 'lunch', 'dinner', 'brunch']
 days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'today']
 dhall_aliases = {'collins' : 'cmc', 'colins' : 'cmc', 'hoch' : 'mudd', 'malott' : 'scripps', 'malot': 'scripps', 'oldie' : 'oldenborg', 'old' : 'oldenborg', 'mcconnel' : 'pitzer', 'mcconnell' : 'pitzer'}
 day_aliases = {'m' : 'mon', 'monday' : 'mon', 't' : 'tue', 'tuesday' : 'tue', 'w': 'wed', 'wednesday' : 'wed', 'r' : 'thu', 'thursday' : 'thu', 'f' : 'fri', 'friday':'fri'}
@@ -53,10 +53,16 @@ def get_menu(dhall, day, meal):
 
 def wat_meal():
     rn = datetime.now()
-    if rn.hour <= 10:
+    day = days[rn.weekday()]
+    if day is 'sat' or day is 'sun':
+        if rn.hour <= 14:
+            meal = 'brunch'
+        else:
+            meal = 'dinner'
+    elif rn.hour <= 10:
         # Breakfast before 10am
         meal = 'breakfast'
-    elif rn.hour > 10 and rn.hour <= 2:
+    elif rn.hour > 10 and rn.hour <= 14:
         meal = 'lunch'
     else:
         meal = 'dinner'
