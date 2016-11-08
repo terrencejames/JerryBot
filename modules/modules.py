@@ -42,6 +42,7 @@ modules = {
     "choose": choose,
     "tip": tip,
     "translate" : translate_text,
-    "goodshit" : mini_modules.goodshit
+    "goodshit" : mini_modules.goodshit,
+    "lenny" : mini_modules.lenny
     }
 
