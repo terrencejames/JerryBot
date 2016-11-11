@@ -2,7 +2,7 @@
 from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules
-from configuration import prefixes
+from configuration import prefixes, bryanCases
 import sys
 
 class JerryBot(Client):
@@ -16,13 +16,23 @@ class JerryBot(Client):
 
 
     def parse_message(self, message):
+        words = message.split()
+        print(words)
+
         if message[0] in prefixes:
             args = message[1:].split(" ")
             command = args[0]
             arguments = args[1:]
             if command in modules:
                 return (True, modules[command](arguments))
+
+        for word in words:
+            print("entered loop")
+            if word in bryanCases:
+                print("found Bryan")
+                return (True, modules["bryan"]([]))
         return (False, "")
+
 
     def on_message(self, mid, author_id, author_name, message, metadata):
         try:

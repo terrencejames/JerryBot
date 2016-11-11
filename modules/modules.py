@@ -7,7 +7,7 @@ from weather import weather, jacket
 from tip import tip
 from translate import translate_text
 from rood import eatadick
-from barrelroll import doabarrelroll
+from barrelroll import bryan
 import mini_modules
 
 help_string = ""
@@ -35,8 +35,8 @@ modules = {
     "eatadick": eatadick,
     "weather": weather,
     "jacket": jacket,
-    "barrelroll" : doabarrelroll,
-    "doabarrelroll": doabarrelroll,
+    "bryan" : bryan,
+    "doabarrelroll": bryan,
     "shrug": mini_modules.shrug,
     "birb": mini_modules.bird,
     "choose": choose,

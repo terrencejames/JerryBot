@@ -1,2 +1,2 @@
-USERNAME = 'Username here'
-PASSWORD = 'Password here'
+USERNAME = 'luxannacrownguard@gmail.com'
+PASSWORD = 'demacia69'
