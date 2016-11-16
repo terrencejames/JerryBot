@@ -43,6 +43,7 @@ modules = {
     "tip": tip,
     "translate" : translate_text,
     "goodshit" : mini_modules.goodshit,
-    "lenny" : mini_modules.lenny
+    "lenny" : mini_modules.lenny,
+    "sleep" : mini_modules.sleep
     }
 

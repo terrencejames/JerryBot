@@ -4,6 +4,8 @@ from credentials import USERNAME, PASSWORD
 from modules.modules import modules
 from configuration import prefixes
 import sys
+import multiprocessing
+
 
 class JerryBot(Client):
     test = False
@@ -24,6 +26,21 @@ class JerryBot(Client):
                 return (True, modules[command](arguments))
         return (False, "")
 
+    def send_message(self, message,author_id, metadata):
+        if "threadFbId" in metadata["delta"]["messageMetadata"]["threadKey"]:
+            #if str(author_id) != str(self.uid):
+            isValid, result = self.parse_message(message)
+            if isValid:
+                self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
+        #reply to people
+        else:
+            if str(author_id) != str(self.uid):
+                isValid, result = self.parse_message(message)
+
+                if isValid:
+                    self.send(author_id, result)
+
+
     def on_message(self, mid, author_id, author_name, message, metadata):
         try:
             self.markAsDelivered(author_id, mid) #mark delivered
@@ -36,21 +53,12 @@ class JerryBot(Client):
                 print(metadata)
                 print("===")
 
-            #reply to groups
-            if "threadFbId" in metadata["delta"]["messageMetadata"]["threadKey"]:
-                #if str(author_id) != str(self.uid):
-                isValid, result = self.parse_message(message)
-                if isValid:
-                    self.send(metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"], result, message_type='group')
-            #reply to people
-            else:
-                if str(author_id) != str(self.uid):
-                    isValid, result = self.parse_message(message)
+            p = multiprocessing.Process(target=self.send_message, args=(message, author_id, metadata))
+            p.start()
 
-                    if isValid:
-                        self.send(author_id, result)
-        except:
-            pass
+            #reply to groups
+        except Exception, e:
+            print(e)
 
 
 
@@ -61,12 +69,9 @@ def main():
         try:
             bot.listen()
         except (KeyboardInterrupt, SystemExit):
-            raise
+            sys.exit(0)
         else:
             print(sys.exc_info()[0])
-            print("error?")
-
-
 
 
 if __name__ == "__main__":
