@@ -3,36 +3,119 @@ from auth import TOKEN
 import json
 from datetime import datetime
 
-dhalls = ['frary', 'frank', 'cmc', 'mudd', 'scripps', 'oldenborg', 'pitzer']
-meals = ['breakfast', 'lunch', 'dinner', 'brunch']
-days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'today']
-dhall_aliases = {'collins' : 'cmc', 'colins' : 'cmc', 'hoch' : 'mudd', 'malott' : 'scripps', 'malot': 'scripps', 'oldie' : 'oldenborg', 'old' : 'oldenborg', 'mcconnel' : 'pitzer', 'mcconnell' : 'pitzer'}
-day_aliases = {'m' : 'mon', 'monday' : 'mon', 't' : 'tue', 'tuesday' : 'tue', 'w': 'wed', 'wednesday' : 'wed', 'r' : 'thu', 'thursday' : 'thu', 'f' : 'fri', 'friday':'fri'}
+#dhalls = ['frary', 'frank', 'cmc', 'mudd', 'scripps', 'oldenborg', 'pitzer']
+#meals = ['breakfast', 'lunch', 'dinner', 'brunch']
+# days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'today']
+#dhall_aliases = {'collins' : 'cmc', 'colins' : 'cmc', 'hoch' : 'mudd', 'malott' : 'scripps', 'malot': 'scripps', 'oldie' : 'oldenborg', 'old' : 'oldenborg', 'mcconnel' : 'pitzer', 'mcconnell' : 'pitzer'}
+#day_aliases = {'m' : 'mon', 'monday' : 'mon', 't' : 'tue', 'tuesday' : 'tue', 'w': 'wed', 'wednesday' : 'wed', 'r' : 'thu', 'thursday' : 'thu', 'f' : 'fri', 'friday':'fri'}
+
+def get_day(day):
+    return {
+        0 : 'mon',
+        'mon' : 'mon',
+        'monday' : 'mon',
+        'm' : 'mon',
+
+        1 : 'tue',
+        'tue' : 'tue',
+        'tuesday' : 'tue',
+        'tues' : 'tue',
+        't': 'tue',
+
+        2 : 'wed',
+        'wed' : 'wed',
+        'wednesday' : 'wed',
+        'w' : 'wed',
+
+        3 : 'thu',
+        'thu' : 'thu',
+        'thursday' : 'thu',
+        'thurs' : 'thu',
+        'r' : 'thu',
+
+        4 : 'fri',
+        'fri': 'fri',
+        'friday' : 'fri',
+        'f' : 'fri',
+
+        5 : 'sat',
+        'sat' : 'sat',
+        'saturday' : 'sat',
+        's' : 'sat',
+
+        6 : 'sun',
+        'sun' : 'sun',
+        'sunday' : 'sun',
+        's' : 's',
+
+        }.get(day, -1)
+
+def get_dhall(dhall):
+    return {
+        'frank': 'frank',
+        'frunk': 'frank',
+
+        'oldenborg': 'oldenborg',
+        'oldie' : 'oldenborg',
+        'old' : 'oldenborg',
+
+        'frary': 'frary',
+
+        'cmc' : 'cmc',
+        'collins' : 'cmc',
+
+        'mudd' : 'mudd',
+        'hoch' : 'mudd',
+        'shan' : 'mudd',
+
+        'scripps' : 'scripps',
+        'malott' : 'scripps',
+        'malot' : 'scripps',
+
+        'pitzer' : 'pitzer',
+        'mcconnell' : 'pitzer',
+        'mcconnel' : 'pitzer'
+    }.get(dhall, -1)
+
+def get_meal(meal):
+    return {
+        'breakfast' : 'breakfast',
+        'b' : 'breakfast',
+        'break' : 'breakfast',
+
+        'lunch' : 'lunch',
+        'l' : 'lunch',
+
+        'dinner' : 'dinner',
+        'd' : 'dinner',
+
+        'brunch' : 'brunch',
+        'r' : 'brunch',
+        'br' : 'brunch'
+    }.get(meal, -1)
 
 def parse_input(in_text):
     # Check each of the input words, determine what's what
-    dhall = -1
-    meal = -1
-    day = -1
+
+    #set defaults
+    dhall = 'frary'
+    meal = wat_meal()
+    day = get_day(datetime.weekday(datetime.today()))
+
+    #format text
+    in_text = [i.lower().strip() for i in in_text]
     for w in in_text:
-        # Normalize the text
-        w = w.lower().strip()
-        for d in dhalls:
-            if w in d:
-                dhall = d
-        for m in meals:
-            if w in m:
-                meal = m
-        for t in days:
-            if w in t:
-                day = t
-    # Adding compatability for dhall names (not just school name)
-    # If it's still negative one, then check aliases
-    if dhall is -1:
-        for w in in_text:
-            w = w.lower().strip()
-            if w in dhall_aliases:
-                dhall = dhall_aliases[w]
+
+        #try on each dictionary lookup
+        r_day = get_day(w)
+        r_hall = get_dhall(w)
+        r_meal = get_meal(w)
+
+        #change if default value was not returned
+        day = r_day if r_day is not -1 else day
+        dhall = r_hall if r_hall is not -1 else dhall
+        meal = r_meal if r_meal is not -1 else meal
+
     return dhall, day, meal
 
 def get_menu(dhall, day, meal):
@@ -43,7 +126,7 @@ def get_menu(dhall, day, meal):
     food.append('~*~' + dhall + '~*~')
     food.append('~*~' + day + '~*~')
     food.append('~*~' + meal + '~*~')
-    try: 
+    try:
         for f in j[0]['food_items']:
             food.append(str(f))
         return food
@@ -53,7 +136,7 @@ def get_menu(dhall, day, meal):
 
 def wat_meal():
     rn = datetime.now()
-    day = days[rn.weekday()]
+    day = get_day('today')
     if day is 'sat' or day is 'sun':
         if rn.hour <= 14:
             meal = 'brunch'
@@ -66,39 +149,11 @@ def wat_meal():
         meal = 'lunch'
     else:
         meal = 'dinner'
+
     return meal
 
 def menu(args):
     dhall, day, meal = parse_input(args)
-    if dhall is 'mudd':
-        return ('Mudd does not have their menu on the aspc site :(')
-    elif dhall is not -1 and meal is not -1 and day is not -1:
-        pass
-    elif dhall is not -1 and meal is not -1 and day is -1:
-        # No day --> default to today
-        day = days[datetime.today().weekday()]
-    elif dhall is not -1 and meal is -1 and day is not -1:
-        # No meal --> closest meal on that day
-        meal = wat_meal()
-    elif dhall is -1 and meal is not -1 and day is not -1:
-        # No dhall --> default to frary
-        dhall = 'frary'
-    elif dhall is not -1 and meal is -1 and day is -1:
-        # Just dining hall --> next meal today
-        meal = wat_meal()
-        day = days[datetime.today().weekday()]
-    elif dhall is -1 and meal is not -1 and day is -1:
-        # Just meal --> default of frary today
-        dhall = 'frary'
-        day = days[datetime.today().weekday()]
-    elif dhall is -1 and meal is -1 and day is not -1:
-        # Jus the day --> frary, closest meal of that day
-        dhall = 'frary'
-        meal = wat_meal()
-    elif dhall is -1 and meal is -1 and day is -1:
-        dhall = 'frary'
-        meal = wat_meal()
-        day = days[datetime.today().weekday()]
     food = get_menu(dhall, day, meal)
     if len(food) > 0:
         return ('\n'.join(food))
