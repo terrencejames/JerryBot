@@ -142,10 +142,10 @@ def wat_meal():
             meal = 'brunch'
         else:
             meal = 'dinner'
-    elif rn.hour <= 10:
+    elif rn.hour <= 9:
         # Breakfast before 10am
         meal = 'breakfast'
-    elif rn.hour > 10 and rn.hour <= 14:
+    elif rn.hour >= 10 and rn.hour <= 14:
         meal = 'lunch'
     else:
         meal = 'dinner'
