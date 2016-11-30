@@ -46,7 +46,7 @@ modules = {
     "translate" : translate_text,
     "goodshit" : mini_modules.goodshit,
     "lenny" : mini_modules.lenny,
-    "sleep" : mini_modules.sleep
+    "sleep" : mini_modules.sleep,
     "snack" : snack
     }
 
