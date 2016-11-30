@@ -9,6 +9,7 @@ from translate import translate_text
 from rood import eatadick
 from barrelroll import doabarrelroll
 from snack import snack
+from poll import poll
 import mini_modules
 
 
@@ -47,6 +48,7 @@ modules = {
     "goodshit" : mini_modules.goodshit,
     "lenny" : mini_modules.lenny,
     "sleep" : mini_modules.sleep,
-    "snack" : snack
+    "snack" : snack,
+    "poll" : poll
     }
 
