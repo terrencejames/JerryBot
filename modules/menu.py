@@ -136,7 +136,7 @@ def get_menu(dhall, day, meal):
 
 def wat_meal():
     rn = datetime.now()
-    day = get_day('today')
+    day = get_day(datetime.weekday(datetime.today()))
     if day is 'sat' or day is 'sun':
         if rn.hour <= 14:
             meal = 'brunch'
