@@ -5,9 +5,11 @@ from configuration import prefixes
 import sys
 import multiprocessing
 
+isRunning = True
+
 def poll(args):
     pollBot = PollBot(USERNAME, PASSWORD)
-    while 1:
+    while isRunning:
         try:
             pollBot.listen()
         except:
@@ -25,7 +27,9 @@ class PollBot(Client):
         self.votes = {}
 
     def end(self, args):
+        global isRunning
         self.listening = False
+        isRunning = False
         sys.exit(0)
 
     def vote(self, args):
