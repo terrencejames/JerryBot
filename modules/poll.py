@@ -7,7 +7,7 @@ import multiprocessing
 
 def poll(args):
     pollBot = PollBot(USERNAME, PASSWORD)
-    while isRunning:
+    while 1:
         try:
             pollBot.listen()
         except:
