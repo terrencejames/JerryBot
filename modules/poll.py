@@ -75,4 +75,13 @@ class PollBot(Client):
         except Exception, e:
             print(e)
 
+"""
+PollBot bugs
+!end sometimes kills the entire bot
+!poll takes 5 seconds to start up and doesn't say when it's ready to go
+!end can end the bot without ever printing the results
+polls aren't named and aren't local to group chats (lol)
+people can vote twice
 
+
+"""
