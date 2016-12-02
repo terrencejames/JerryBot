@@ -71,6 +71,8 @@ def get_dhall(dhall):
         'scripps' : 'scripps',
         'malott' : 'scripps',
         'malot' : 'scripps',
+        'scripts' : 'scripps',
+        'scrips' :'scripps',
 
         'pitzer' : 'pitzer',
         'mcconnell' : 'pitzer',
