@@ -36,7 +36,7 @@ def get_weather(city="Claremont"):
     j = json.loads(req.text)
     return j
 
-def weather(args):
+def weather(args, permisions = {}):
     global current_weather
 
     if len(args) < 1:
@@ -57,7 +57,7 @@ def weather(args):
                                                         temp_change(loc_weather["main"]["temp_max"]))
 
 
-def jacket(args):
+def jacket(args, permisions = {}):
     global current_weather
     global hot_temp, cool_temp, chilly_temp
     global no_wind, some_wind, many_wind

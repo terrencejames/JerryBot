@@ -15,7 +15,7 @@ if it does exist, then
 
   otherwise overwrite the file and return a new result
 """
-def snack(args):
+def snack(args, permisions = {}):
     day = datetime.weekday(datetime.today())
     if day < 3 or date == 6:
         if not os.path.exists(os.path.join(os.getcwd(), "_snack.txt")):

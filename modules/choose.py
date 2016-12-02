@@ -1,6 +1,6 @@
 import math
 
-def choose(args): 
+def choose(args, permisions = {}):
     ans = ""
     try:
         n = int(args[0])

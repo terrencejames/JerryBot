@@ -17,7 +17,7 @@ def to_iso(word):
     return ""
 
 
-def translate_text(args=[]):
+def translate_text(args=[], permisions = {}):
     global translator
 
     if args[0] == "help":

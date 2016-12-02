@@ -152,7 +152,7 @@ def wat_meal():
 
     return meal
 
-def menu(args):
+def menu(args, perms={}):
     dhall, day, meal = parse_input(args)
     food = get_menu(dhall, day, meal)
     if len(food) > 0:
