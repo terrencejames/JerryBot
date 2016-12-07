@@ -19,7 +19,7 @@ def to_iso(word):
 
 def translate_text(args=[], permisions = {}):
     global translator
-
+    
     if args[0] == "help":
         return "!translate $from$>$to$ words"
     if len(args) == 1:

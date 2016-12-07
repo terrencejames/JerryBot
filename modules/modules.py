@@ -2,6 +2,7 @@
 from roll import roll
 from flip import flip
 from menu import menu
+from hi import hi
 from choose import choose
 from weather import weather, jacket
 from tip import tip
@@ -10,6 +11,9 @@ from rood import eatadick
 from barrelroll import doabarrelroll
 from snack import snack
 from poll import poll
+from vote import vote
+from result import result
+from end import end
 import mini_modules
 import permissions as p
 
@@ -49,6 +53,10 @@ modules = {
     "lenny" : (mini_modules.lenny, []),
     "sleep" : (mini_modules.sleep, []),
     "snack" : (snack, []),
-    "poll" : (poll, [p.MESSAGE_THREADID])
+    "poll" : (poll, [p.MESSAGE_THREADID, p.MESSAGE_TIME]),
+    "vote" : (vote, [p.MESSAGE_THREADID, p.USER_NAME]),
+    "result" : (result, [p.MESSAGE_THREADID]),
+    "end" : (end, [p.MESSAGE_THREADID]),
+    "hi" : (hi, [p.USER_NAME])
     }
 

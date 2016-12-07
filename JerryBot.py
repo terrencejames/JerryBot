@@ -23,14 +23,22 @@ class JerryBot(Client):
 
     def get_permission(self, author_id, metadata, permission):
         print("in permissions")
-        return {
+        temp = {
                 p.MESSAGE_TIME : metadata["delta"]["messageMetadata"]["timestamp"],
                 p.MESSAGE_AUTHOR : author_id,
-                p.MESSAGE_THREADID : metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"],
-                p.MESSAGE_MESSAGEID : metadata["delta"]["messageMetadata"]["messageId"]
-           }.get(permission, None)
+                p.MESSAGE_MESSAGEID : metadata["delta"]["messageMetadata"]["messageId"],
+                p.USER_NAME : self.getUserInfo(author_id)['name']
+            }
+        try:
+            temp[p.MESSAGE_THREADID] = metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"]
+        except:
+            # This means it's an individual message, so no Thread ID.
+            # Simply don't include it in the perms
+            pass
+        return temp.get(permission, None)
 
     def parse_message(self, message, author_id, metadata):
+        # If the message starts w/ one of the specified prefixes
         if message[0] in prefixes:
             args = message[1:].split(" ")
             command = args[0]
@@ -39,7 +47,7 @@ class JerryBot(Client):
             if command_module is not False:
                 module, permissions = command_module
                 perm_dict = {}
-                print(permissions)
+                print("index of perms is:",permissions)
                 for perm in permissions:
                     try:
                         perm_res = self.get_permission(author_id, metadata, perm)
@@ -61,7 +69,7 @@ class JerryBot(Client):
         #reply to people
         else:
             if str(author_id) != str(self.uid):
-                isValid, result = self.parse_message(message)
+                isValid, result = self.parse_message(message, author_id, metadata)
 
                 if isValid:
                     self.send(author_id, result)
@@ -73,11 +81,12 @@ class JerryBot(Client):
             self.markAsRead(author_id) #mark read
 
             if self.test:
-                print("%s said: %s"%(author_id, message))
-                print(mid)
-                print(author_name)
-                print(metadata)
-                print("===")
+                print("==METADATA==")
+                print("%s said: %s"%(self.getUserInfo(author_id)['name'], message))
+                # print(mid)
+                # print(author_name)
+                # print(metadata)
+                print("====")
 
             p = multiprocessing.Process(target=self.send_message, args=(message, author_id, metadata))
             p.start()
