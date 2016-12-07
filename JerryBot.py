@@ -40,7 +40,7 @@ class JerryBot(Client):
     def parse_message(self, message, author_id, metadata):
         # If the message starts w/ one of the specified prefixes
         if message[0] in prefixes:
-            args = message[1:].strip().split(" ")
+            args = message[1:].strip().lower().split(" ")
             command = args[0]
             arguments = args[1:]
             command_module = self.isCommand(command)
