@@ -17,6 +17,8 @@ def vote(args, perms = {}):
         return "You can't vote in a chat by yourself!"
 
     userID = perms[p.USER_NAME]
+    # Store vote
+    response = " ".join(args)
     
     # Get folder names for group chats that have previously polled
     polls = os.listdir('modules/poll')
@@ -27,7 +29,6 @@ def vote(args, perms = {}):
         if os.path.isfile('modules/poll/' + threadID + '/voting.txt'):
             # If first vote (votes file doesn't exist yet)
             if not os.path.isfile("modules/poll/" + threadID + "/votes.txt"):
-                response = " ".join(args)
                 # Record vote
                 with open("modules/poll/" + threadID + "/votes.txt","w") as votes:
                     json.dump({response : 1}, votes)
