@@ -18,7 +18,7 @@ if it does exist, then
 def snack(args, permisions = {}):
     day = datetime.weekday(datetime.today())
     if day < 3 or date == 6:
-        if not os.path.exists(os.path.join(os.getcwd(), "_snack.txt")):
+        if not os.path.exists(os.path.join(os.getcwd(), ".snack.txt")):
             with open("_snack.txt", 'w+') as f:
                 f.write(str(day) + "\n")
                 res = randint(1,2)
