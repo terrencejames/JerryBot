@@ -50,10 +50,10 @@ modules = {
     "lenny" : (mini_modules.lenny, []),
     "sleep" : (mini_modules.sleep, []),
     "snack" : (snack, []),
-    "poll" : (poll, [p.MESSAGE_THREADID, p.MESSAGE_TIME, p.POLL_LOCK]),
-    "vote" : (vote, [p.MESSAGE_THREADID, p.USER_NAME, p.POLL_LOCK]),
-    "result" : (result, [p.MESSAGE_THREADID, p.POLL_LOCK]),
-    "end" : (end, [p.MESSAGE_THREADID, p.POLL_LOCK]),
+    "poll" : (poll, [p.MESSAGE_THREADID, p.MESSAGE_TIME]),
+    "vote" : (vote, [p.MESSAGE_THREADID, p.USER_NAME]),
+    "result" : (result, [p.MESSAGE_THREADID]),
+    "end" : (end, [p.MESSAGE_THREADID]),
     "hi" : (hi, [p.USER_NAME])
     }
 
