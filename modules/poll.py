@@ -2,9 +2,11 @@ import permissions as p
 import os
 import json
 from json_fix import *
+import multiprocessing as mp
 
+# Used to handle concurrency
 global pollLock
-lock = Lock()
+lock = mp.Lock()
 
 def poll(args, perms = {}):
     """

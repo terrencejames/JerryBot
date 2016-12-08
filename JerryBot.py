@@ -14,7 +14,6 @@ class JerryBot(Client):
         Client.__init__(self, email, password, debug, user_agent)
         self.self = test
         self.modules = modules
-        self.pollLock = multiprocessing.Lock()
 
     def isCommand(self, command):
         for key, val in modules.iteritems():
@@ -28,8 +27,7 @@ class JerryBot(Client):
                 p.MESSAGE_TIME : metadata["delta"]["messageMetadata"]["timestamp"],
                 p.MESSAGE_AUTHOR : author_id,
                 p.MESSAGE_MESSAGEID : metadata["delta"]["messageMetadata"]["messageId"],
-                p.USER_NAME : self.getUserInfo(author_id)['name'],
-                p.POLL_LOCK : self.pollLock
+                p.USER_NAME : self.getUserInfo(author_id)['name']
             }
         try:
             temp[p.MESSAGE_THREADID] = metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"]
