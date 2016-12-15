@@ -23,6 +23,8 @@ class JerryBot(Client):
 
     def get_permission(self, author_id, metadata, permission):
         print("in permissions")
+
+        #build permissions
         temp = {
                 p.MESSAGE_TIME : metadata["delta"]["messageMetadata"]["timestamp"],
                 p.MESSAGE_AUTHOR : author_id,
@@ -40,14 +42,20 @@ class JerryBot(Client):
     def parse_message(self, message, author_id, metadata):
         # If the message starts w/ one of the specified prefixes
         if message[0] in prefixes:
+            #split the message into parts
             args = message[1:].strip().lower().split(" ")
+            #first part is the command
             command = args[0]
+            #rest is the arguments
             arguments = args[1:]
+            #if there is a command for the argument
             command_module = self.isCommand(command)
             if command_module is not False:
+                #get the function and permissions list
                 module, permissions = command_module
                 perm_dict = {}
                 print("index of perms is:",permissions)
+                #build the perms
                 for perm in permissions:
                     try:
                         perm_res = self.get_permission(author_id, metadata, perm)
@@ -56,6 +64,7 @@ class JerryBot(Client):
                     except Exception as e:
                         print("error %s" %(e))
                 print(perm_dict)
+                #pass the function the arguments and permissions dictionary
                 result = module(arguments, perm_dict)
                 return (True, result)
         return (False, "")
@@ -99,13 +108,18 @@ class JerryBot(Client):
 
 def main():
 
+    #create bot
     bot = JerryBot(USERNAME, PASSWORD)
+
+    #kep going
     while 1:
         try:
             bot.listen()
+        #quit
         except (KeyboardInterrupt, SystemExit):
             sys.exit(0)
         else:
+            #print diagnostic info
             print(sys.exc_info()[0])
 
 
