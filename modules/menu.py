@@ -1,7 +1,12 @@
+# -*- coding: utf8 -*-
 import requests
 from auth import TOKEN
 import json
 from datetime import datetime
+from HTMLParser import HTMLParser
+
+# Used to convert HTML codes to their characters
+h = HTMLParser()
 
 #dhalls = ['frary', 'frank', 'cmc', 'mudd', 'scripps', 'oldenborg', 'pitzer']
 #meals = ['breakfast', 'lunch', 'dinner', 'brunch']
@@ -123,7 +128,10 @@ def parse_input(in_text):
 def get_menu(dhall, day, meal):
     url = 'https://aspc.pomona.edu/api/menu/dining_hall/' + dhall + '/day/' + day + '/meal/' + meal
     req = requests.get(url , params={'auth_token' : TOKEN})
-    j = json.loads(req.text)
+    try:
+        j = json.loads(req.text)
+    except:
+        return ["ASPC is down :("]
     food = []
     food.append('~*~' + dhall + '~*~')
     food.append('~*~' + day + '~*~')
@@ -144,19 +152,28 @@ def wat_meal():
             meal = 'brunch'
         else:
             meal = 'dinner'
-    elif rn.hour <= 9:
+    elif rn.hour <= 10:
         # Breakfast before 10am
         meal = 'breakfast'
-    elif rn.hour >= 10 and rn.hour <= 14:
+    elif rn.hour > 10 and rn.hour < 14:
         meal = 'lunch'
-    else:
+    elif rn.hour >= 14 and rn.hour <= 20:
         meal = 'dinner'
+    else:
+        # breakfast the next day if > 20
+        meal = 'breakfast'
 
     return meal
+
+def map_html_unencode(lst):
+    temp = []
+    for s in lst:
+        temp.append(str(h.unescape(s)))
+    return temp
 
 def menu(args, perms={}):
     dhall, day, meal = parse_input(args)
     food = get_menu(dhall, day, meal)
     if len(food) > 0:
-        return ('\n'.join(food))
+        return ('\n'.join(food).encode('utf-8').strip())
     return "No menu"
