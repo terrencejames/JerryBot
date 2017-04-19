@@ -2,9 +2,6 @@ from random import randint
 from datetime import datetime
 import os
 
-
-
-
 """
 check the day
 
@@ -17,7 +14,7 @@ if it does exist, then
 """
 def snack(args, permisions = {}):
     day = datetime.weekday(datetime.today())
-    if day < 3 or date == 6:
+    if day < 3 or day == 6:
         if not os.path.exists(os.path.join(os.getcwd(), ".snack.txt")):
             with open("_snack.txt", 'w+') as f:
                 f.write(str(day) + "\n")

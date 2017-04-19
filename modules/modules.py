@@ -12,6 +12,7 @@ from barrelroll import doabarrelroll
 from snack import snack
 from poll import poll,vote,result,end
 from remind import remind
+from tag import tag
 import mini_modules
 import permissions as p
 
@@ -56,6 +57,7 @@ modules = {
     "result" : (result, [p.MESSAGE_THREADID]),
     "end" : (end, [p.MESSAGE_THREADID]),
     "hi" : (hi, [p.USER_NAME]),
-    "remind" : (remind, [p.MESSAGE_AUTHOR])
+    "remind" : (remind, [p.MESSAGE_AUTHOR]),
+    "tag" : (tag, [])
     }
 

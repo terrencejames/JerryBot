@@ -2,6 +2,7 @@
 from fbchat.fbchat import Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules
+from modules.tag import tag
 from configuration import prefixes
 import sys
 import multiprocessing
@@ -41,32 +42,42 @@ class JerryBot(Client):
 
     def parse_message(self, message, author_id, metadata):
         # If the message starts w/ one of the specified prefixes
-        if message[0] in prefixes:
-            #split the message into parts
-            args = message[1:].strip().lower().split(" ")
-            #first part is the command
-            command = args[0]
-            #rest is the arguments
-            arguments = args[1:]
-            #if there is a command for the argument
-            command_module = self.isCommand(command)
-            if command_module is not False:
-                #get the function and permissions list
-                module, permissions = command_module
-                perm_dict = {}
-                print("index of perms is:",permissions)
-                #build the perms
-                for perm in permissions:
-                    try:
-                        perm_res = self.get_permission(author_id, metadata, perm)
-                        print("perm res %s" %(perm_res))
-                        perm_dict[perm]= (perm_res)
-                    except Exception as e:
-                        print("error %s" %(e))
-                print(perm_dict)
-                #pass the function the arguments and permissions dictionary
-                result = module(arguments, perm_dict)
+        try:
+            if message[0] in prefixes:
+                #split the message into parts
+                args = message[1:].strip().lower().split(" ")
+                #first part is the command
+                command = args[0]
+                #rest is the arguments
+                arguments = args[1:]
+                #if there is a command for the argument
+                command_module = self.isCommand(command)
+                if command_module is not False:
+                    #get the function and permissions list
+                    module, permissions = command_module
+                    perm_dict = {}
+                    print("index of perms is:",permissions)
+                    #build the perms
+                    for perm in permissions:
+                        try:
+                            perm_res = self.get_permission(author_id, metadata, perm)
+                            print("perm res %s" %(perm_res))
+                            perm_dict[perm]= (perm_res)
+                        except Exception as e:
+                            print("error %s" %(e))
+                    print(perm_dict)
+                    #pass the function the arguments and permissions dictionary
+                    result = module(arguments, perm_dict)
+                    return (True, result)
+            elif message[0] == '@':
+                # Tagging module
+                result = tag(message[1:])
                 return (True, result)
+        except Exception as e:
+            with open('error.log', 'w') as log:
+                log.write("OOPS, THERE WAS AN ERROR:\n {}".format(str(e)))
+            return (True, "Failing gracefully..")
+
         return (False, "")
 
     def send_message(self, message,author_id, metadata):
