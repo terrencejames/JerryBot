@@ -1,6 +1,6 @@
 from random import randint
 
-def roll(args):
+def roll(args, permisions = {}):
     if len(args) > 0:
         try:
             num = int(args[0])

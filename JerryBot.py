@@ -2,8 +2,12 @@
 from fbchat import log, Client
 from credentials import USERNAME, PASSWORD
 from modules.modules import modules
+from modules.tag import tag
 from configuration import prefixes
 import sys
+import multiprocessing
+import modules.permissions as p
+
 
 class LuxBot(Client):
     # test = False
@@ -13,6 +17,67 @@ class LuxBot(Client):
     #     self.self = test
     #     self.modules = modules
 
+    def isCommand(self, command):
+        for key, val in modules.iteritems():
+            if key == command:
+                return val
+        return False
+
+    def get_permission(self, author_id, metadata, permission):
+        print("in permissions")
+
+        #build permissions
+        temp = {
+                p.MESSAGE_TIME : metadata["delta"]["messageMetadata"]["timestamp"],
+                p.MESSAGE_AUTHOR : author_id,
+                p.MESSAGE_MESSAGEID : metadata["delta"]["messageMetadata"]["messageId"],
+                p.USER_NAME : self.getUserInfo(author_id)['name']
+            }
+        try:
+            temp[p.MESSAGE_THREADID] = metadata["delta"]["messageMetadata"]["threadKey"]["threadFbId"]
+        except:
+            # This means it's an individual message, so no Thread ID.
+            # Simply don't include it in the perms
+            pass
+        return temp.get(permission, None)
+
+    def parse_message(self, message, author_id, metadata):
+        # If the message starts w/ one of the specified prefixes
+        try:
+            if message[0] in prefixes:
+                #split the message into parts
+                args = message[1:].strip().lower().split(" ")
+                #first part is the command
+                command = args[0]
+                #rest is the arguments
+                arguments = args[1:]
+                #if there is a command for the argument
+                command_module = self.isCommand(command)
+                if command_module is not False:
+                    #get the function and permissions list
+                    module, permissions = command_module
+                    perm_dict = {}
+                    print("index of perms is:",permissions)
+                    #build the perms
+                    for perm in permissions:
+                        try:
+                            perm_res = self.get_permission(author_id, metadata, perm)
+                            print("perm res %s" %(perm_res))
+                            perm_dict[perm]= (perm_res)
+                        except Exception as e:
+                            print("error %s" %(e))
+                    print(perm_dict)
+                    #pass the function the arguments and permissions dictionary
+                    result = module(arguments, perm_dict)
+                    return (True, result)
+            elif message[0] == '@':
+                # Tagging module
+                result = tag(message[1:])
+                return (True, result)
+        except Exception as e:
+            with open('error.log', 'w') as log:
+                log.write("OOPS, THERE WAS AN ERROR:\n {}".format(str(e)))
+            return (True, "Failing gracefully..")
 
 
     def parse_message(self, message, thread_id, thread_type):
@@ -71,6 +136,7 @@ class LuxBot(Client):
 
 
 
+
 def main():
 
     bot = LuxBot(USERNAME, PASSWORD)
@@ -83,8 +149,6 @@ def main():
     #     else:
     #         print(sys.exc_info()[0])
     #         print("error?")
-
-
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ def tip_calc(total, people, percent=15):
     new_total = per_person * people
     return "Tip: %.2f\nTotal: %.2f\nSplit: %.2f" %(new_total - total, new_total, per_person)
 
-def tip(args):
+def tip(args, permisions = {}):
     try:
         if len(args) == 1:
             if args[0][0].lower() == "h":

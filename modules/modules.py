@@ -1,18 +1,24 @@
-# -*- coding: utf8 -*-
+# -*- coding: (utf8 -*-
 from roll import roll
 from flip import flip
 from menu import menu
+from hi import hi
 from choose import choose
 from weather import weather, jacket
 from tip import tip
 from translate import translate_text
 from rood import eatadick
 from barrelroll import doabarrelroll
+from snack import snack
+from poll import poll,vote,result,end
+from remind import remind
+from tag import tag
 import mini_modules
+import permissions as p
 
 help_string = ""
 
-def help_message(args=[]):
+def help_message(args=[], perms={}):
     global help_string
     if help_string is "":
         result = "Commands:\n"
@@ -22,27 +28,36 @@ def help_message(args=[]):
     return help_string
 
 
-"""command : function"""
+"""command : (function"""
 modules = {
-    "roll": roll,
-    "flip": flip,
-    "help": help_message,
-    "menu": menu,
-    "fud": menu,
-    "food": menu,
-    "sustenance":menu,
-    "thanks": mini_modules.thanks,
-    "eatadick": eatadick,
-    "weather": weather,
-    "jacket": jacket,
-    "barrelroll" : doabarrelroll,
-    "doabarrelroll": doabarrelroll,
-    "shrug": mini_modules.shrug,
-    "birb": mini_modules.bird,
-    "choose": choose,
-    "tip": tip,
-    "translate" : translate_text,
-    "goodshit" : mini_modules.goodshit,
-    "lenny" : mini_modules.lenny
+    "roll": (roll, []),
+    "flip": (flip, []),
+    "help": (help_message, []),
+    "menu": (menu, []),
+    "fud": (menu, []),
+    "food": (menu, []),
+    "sustenance": (menu, []),
+    "thanks": (mini_modules.thanks, []),
+    "eatadick": (eatadick, []),
+    "weather": (weather, []),
+    "jacket": (jacket, []),
+    "barrelroll" : (doabarrelroll, []),
+    "doabarrelroll": (doabarrelroll, []),
+    "shrug": (mini_modules.shrug, []),
+    "birb": (mini_modules.bird, []),
+    "choose": (choose, []),
+    "tip": (tip, []),
+    "translate" : (translate_text, []),
+    "goodshit" : (mini_modules.goodshit, []),
+    "lenny" : (mini_modules.lenny, []),
+    "sleep" : (mini_modules.sleep, []),
+    "snack" : (snack, []),
+    "poll" : (poll, [p.MESSAGE_THREADID, p.MESSAGE_TIME]),
+    "vote" : (vote, [p.MESSAGE_THREADID, p.USER_NAME]),
+    "result" : (result, [p.MESSAGE_THREADID]),
+    "end" : (end, [p.MESSAGE_THREADID]),
+    "hi" : (hi, [p.USER_NAME]),
+    "remind" : (remind, [p.MESSAGE_AUTHOR]),
+    "tag" : (tag, [])
     }
 
